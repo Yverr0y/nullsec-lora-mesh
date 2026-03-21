@@ -20,25 +20,25 @@ NullSec LoRa Mesh is a protocol framework for building secure, resilient mesh ne
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   APPLICATION                        │
-│         Chat │ File Transfer │ Telemetry             │
+│                   APPLICATION                       │
+│         Chat │ File Transfer │ Telemetry            │
 ├─────────────────────────────────────────────────────┤
-│                   TRANSPORT                          │
-│     Fragmentation │ Reassembly │ Flow Control        │
+│                   TRANSPORT                         │
+│     Fragmentation │ Reassembly │ Flow Control       │
 ├─────────────────────────────────────────────────────┤
-│                   SECURITY                           │
+│                   SECURITY                          │
 │  ChaCha20-Poly1305 │ X25519 ECDH │ Anti-Replay      │
 ├─────────────────────────────────────────────────────┤
-│                   COMPRESSION                        │
+│                   COMPRESSION                       │
 │      LZ4 (fast) │ Zstd (ratio) │ Adaptive           │
 ├─────────────────────────────────────────────────────┤
-│                   MESH ROUTING                       │
-│    AODV │ Flooding │ Gossip │ Route Maintenance      │
+│                   MESH ROUTING                      │
+│    AODV │ Flooding │ Gossip │ Route Maintenance     │
 ├─────────────────────────────────────────────────────┤
-│                   LINK LAYER                         │
+│                   LINK LAYER                        │
 │   FEC (Reed-Solomon) │ CRC32 │ Duty Cycle Mgmt      │
 ├─────────────────────────────────────────────────────┤
-│                   PHYSICAL                           │
+│                   PHYSICAL                          │
 │      LoRa SX1262/SX1276 │ SubGHz │ Flipper One      │
 └─────────────────────────────────────────────────────┘
 ```
@@ -52,13 +52,13 @@ NullSec LoRa Mesh is a protocol framework for building secure, resilient mesh ne
 │ Sync │ Ver  │ Type │ Src ID │ Dst ID   │ Seq/Frag │ Len │
 │ 2B   │ 1B   │ 1B   │ 4B     │ 4B       │ 4B       │ 2B  │
 ├──────┴──────┴──────┴────────┴──────────┴──────────┴─────┤
-│                    Payload (encrypted)                    │
-│                    0 - 222 bytes                          │
-├──────────────────────────────────────────────────────────┤
-│                    Auth Tag (16B)                         │
-├──────────────────────────────────────────────────────────┤
-│                    FEC Parity (variable)                  │
-└──────────────────────────────────────────────────────────┘
+│                    Payload (encrypted)                  │
+│                    0 - 222 bytes                        │
+├─────────────────────────────────────────────────────────┤
+│                    Auth Tag (16B)                       │
+├─────────────────────────────────────────────────────────┤
+│                    FEC Parity (variable)                │
+└─────────────────────────────────────────────────────────┘
 
 Total overhead: 18B header + 16B auth + FEC = ~40B minimum
 Max payload per frame: 222 bytes (LoRa max 255B - overhead)
